@@ -5,6 +5,7 @@
 //! \brief Стек
 struct Stack
 {
+private:
     //! \brief Указатель на массив
     int* Data;
 
@@ -16,6 +17,16 @@ struct Stack
 
     //! \brief Вместимость стека
     int _capacity = 4;
+
+public:
+    //! \brief Конструктор для инициализации стека
+    Stack(): Data(new int[_capacity]) {}
+
+    //! \brief Деструктор для освобождения памяти
+    ~Stack()
+    {
+        delete[] Data;
+    }
 
     //! \brief Увеличивает стек
     void ResizeArray();

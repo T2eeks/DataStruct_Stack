@@ -9,9 +9,18 @@ struct QueueByRingBuffer
 private:
     // TODO: сделать private или public
     //! \brief Указатель на внутренний кольцевой буфер
-    RingBuffer* _queueByRingBuffer = new RingBuffer;
+    RingBuffer* _queueByRingBuffer;
 
 public:
+    //! \brief Конструктор для инициализации кольцевого буфера
+    QueueByRingBuffer(): _queueByRingBuffer(new RingBuffer) {}
+
+    //! \brief Деструктор для освобождения памяти
+    ~QueueByRingBuffer()
+    {
+        delete _queueByRingBuffer;
+    }
+
     //! \brief Функция инициализации очереди
     //! \return Указатель на массив данных очереди
     int* InitQueue();
@@ -40,5 +49,4 @@ public:
     //! \brief Возвращает указатель на буфер
     //! \return Указатель на внутренний буфер
     RingBuffer* GetQueueByRingBuffer() const;
-    ;
 };

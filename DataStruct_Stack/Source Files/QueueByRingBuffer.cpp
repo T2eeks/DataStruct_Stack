@@ -2,23 +2,27 @@
 
 int* QueueByRingBuffer::InitQueue()
 {
-    int lenght = _queueByRingBuffer->_lenght;
+    int lenght = _queueByRingBuffer->GetLength();
 
-    _queueByRingBuffer->_data = new int[lenght];
+    int* newData = new int[lenght];
+    _queueByRingBuffer->SetData(newData);
 
-    return _queueByRingBuffer->_data;
+    return _queueByRingBuffer->GetData();
 }
 
 void PushInRingBuffer(int data, RingBuffer* ringBuffer)
 {
-    if (ringBuffer->_ocupiedSpace == ringBuffer->_lenght)
+    if (ringBuffer->GetOccupiedSpace() == ringBuffer->GetLength())
     {
         ResizeBuffer(ringBuffer);
     }
 
-    ringBuffer->_data[ringBuffer->_indexIn] = data;
-    ringBuffer->_indexIn = (ringBuffer->_indexIn + 1) % ringBuffer->_lenght;
-    ++ringBuffer->_ocupiedSpace;
+    int* dataArray = ringBuffer->GetData();
+    int indexIn = ringBuffer->GetIndexIn();
+
+    dataArray[indexIn] = data;
+    ringBuffer->SetIndexIn((indexIn + 1) % ringBuffer->GetLength());
+    ringBuffer->SetOccupiedSpace(ringBuffer->GetOccupiedSpace() + 1);
 }
 
 void QueueByRingBuffer::PushInQueue(int data)
@@ -28,21 +32,21 @@ void QueueByRingBuffer::PushInQueue(int data)
 
 void ResizeBuffer(RingBuffer* ringBuffer)
 {
-    int newCapacity = ringBuffer->_lenght * 2;
+    int newCapacity = ringBuffer->GetLength() * 2;
     int* newData = new int[newCapacity];
 
-    int currentIndex = ringBuffer->_indexOut;
-    for (int i = 0; i < ringBuffer->_ocupiedSpace; ++i)
+    int currentIndex = ringBuffer->GetIndexOut();
+    for (int i = 0; i < ringBuffer->GetOccupiedSpace(); ++i)
     {
-        newData[i] = ringBuffer->_data[currentIndex];
-        currentIndex = (currentIndex + 1) % ringBuffer->_lenght;
+        newData[i] = ringBuffer->GetData()[currentIndex];
+        currentIndex = (currentIndex + 1) % ringBuffer->GetLength();
     }
 
-    delete[] ringBuffer->_data;
-    ringBuffer->_data = newData;
-    ringBuffer->_lenght = newCapacity;
-    ringBuffer->_indexOut = 0;
-    ringBuffer->_indexIn = ringBuffer->_ocupiedSpace;
+    delete[] ringBuffer->GetData();
+    ringBuffer->SetData(newData);
+    ringBuffer->SetLength(newCapacity);
+    ringBuffer->SetIndexOut(0);
+    ringBuffer->SetIndexIn(ringBuffer->GetOccupiedSpace());
 }
 
 int QueueByRingBuffer::PopInQueue()
@@ -58,14 +62,18 @@ RingBuffer* QueueByRingBuffer::GetQueueByRingBuffer() const
 
 bool QueueByRingBuffer::IsEmptyQueue()
 {
-    return _queueByRingBuffer->_ocupiedSpace == 0;
+    return _queueByRingBuffer->GetOccupiedSpace() == 0;
 }
 
 int Pop(RingBuffer* ringBuffer)
 {
-    int data = ringBuffer->_data[ringBuffer->_indexOut];
-    ringBuffer->_indexOut = (ringBuffer->_indexOut + 1) % ringBuffer->_lenght;
-    --ringBuffer->_ocupiedSpace;
+
+    int* dataArray = ringBuffer->GetData();
+    int indexOut = ringBuffer->GetIndexOut();
+
+    int data = dataArray[indexOut];
+    ringBuffer->SetIndexOut((indexOut + 1) % ringBuffer->GetLength());
+    ringBuffer->SetOccupiedSpace(ringBuffer->GetOccupiedSpace() - 1);
 
     return data;
 }

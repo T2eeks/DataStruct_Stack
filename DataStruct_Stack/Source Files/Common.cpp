@@ -64,10 +64,10 @@ void Common::PrintBuffer(const RingBuffer& ringBuffer)
 
     cout << "Buffer contents: ";
 
-    int index = ringBuffer._indexOut;
+    int index = ringBuffer.GetIndexOut();
     for (int i = 0; i < ringBuffer.GetOccupiedSpace(); ++i)
     {
-        cout << ringBuffer._data[index] << " ";
+        cout << ringBuffer.GetData()[index] << " ";
         index = (index + 1) % ringBuffer.GetLength();
     }
     cout << endl;
@@ -84,10 +84,10 @@ void Common::PrintQueue(const QueueByRingBuffer& queueByRingBuffer)
 
     cout << "Queue contents: ";
 
-    int index = ringBuffer->_indexOut;
+    int index = ringBuffer->GetIndexOut();
     for (int i = 0; i < ringBuffer->GetOccupiedSpace(); ++i)
     {
-        cout << ringBuffer->_data[index] << " ";
+        cout << ringBuffer->GetData()[index] << " ";
         index = (index + 1) % ringBuffer->GetLength();
     }
     cout << endl;

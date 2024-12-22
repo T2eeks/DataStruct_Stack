@@ -4,26 +4,26 @@
 #include "Stack.h"
 #include "RingBuffer.h"
 #include "QueueByRingBuffer.h"
-#include "QueueByTwoStaсks.h"
+#include "QueueByTwoStaСЃks.h"
 
-//! \brief Функция основного меню
-//! \return Номер выбранной структуры
+//! \brief Р¤СѓРЅРєС†РёСЏ РѕСЃРЅРѕРІРЅРѕРіРѕ РјРµРЅСЋ
+//! \return РќРѕРјРµСЂ РІС‹Р±СЂР°РЅРЅРѕР№ СЃС‚СЂСѓРєС‚СѓСЂС‹
 int ChooseStruct();
 
-//! \brief Меню для работы со стэком
-//! \param stack Указатель на стэк
+//! \brief РњРµРЅСЋ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃРѕ СЃС‚РµРєРѕРј
+//! \param stack РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚РµРє
 void StackMenu(Stack& stack);
 
-//! \brief Меню для работы с кольцевым буфером
-//! \param ringBuffer Указатель на кольцевой буфер
+//! \brief РњРµРЅСЋ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕС‡РµСЂРµРґСЊСЋ РЅР° РєРѕР»СЊС†РµРІРѕРј Р±СѓС„РµСЂРµ
+//! \param queueByRingBuffer РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕС‡РµСЂРµРґСЊ
 void RingBufferMenu(RingBuffer& ringBuffer);
 
-//! \brief Меню для работы с очередью на кольцевом буфере
-//! \param queueByRingBuffer Указатель на очередь
+//! \brief РњРµРЅСЋ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕС‡РµСЂРµРґСЊСЋ РЅР° РєРѕР»СЊС†РµРІРѕРј Р±СѓС„РµСЂРµ
+//! \param queueByRingBuffer СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РѕС‡РµСЂРµРґСЊ
 void QueueRingBufferMenu(QueueByRingBuffer& queueByRingBuffer);
 
-//! \brief Меню для работы с очередью на двух стэках
-//! \param TwoStacksQueue Указатель на очередь
+//! \brief РњРµРЅСЋ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕС‡РµСЂРµРґСЊСЋ РЅР° РґРІСѓС… СЃС‚РµРєР°С…
+//! \param TwoStacksQueue РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕС‡РµСЂРµРґСЊ
 void TwoStacksQueueMenu(QueueByTwoStacks& TwoStacksQueue);
 
 #endif

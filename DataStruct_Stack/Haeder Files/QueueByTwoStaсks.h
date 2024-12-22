@@ -7,12 +7,23 @@ struct QueueByTwoStacks
 {
 private:
     //! \brief Стэк для добавления
-    Stack* _firstStack = new Stack;
+    Stack* _firstStack;
 
     //! \brief Стэк для удаления
-    Stack* _secondStack = new Stack;
+    Stack* _secondStack;
 
 public:
+
+    //! \brief Конструктор для инициализации стэков
+    QueueByTwoStacks() : _firstStack(new Stack), _secondStack(new Stack) {}
+
+    //! \brief Деструктор для освобождения памяти
+    ~QueueByTwoStacks()
+    {
+        delete _firstStack;
+        delete _secondStack;
+    }
+
     //! \brief Функция инициализации очереди
     void QueueInit();
 
